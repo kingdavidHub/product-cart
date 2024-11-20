@@ -120,10 +120,8 @@ body {
   color: var(--Rose-400);
 }
 
-
-
 /* Desktop */
-@media (min-width: 400px) and (max-width: 1440px) {
+@media (min-width: 430px) and (max-width: 1440px) {
   .container {
     padding: 40px;
     flex-direction: row;

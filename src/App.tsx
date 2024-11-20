@@ -9,13 +9,10 @@ interface CartItems {
   category: string;
 }
 
-
 const App = () => {
   const [cartItems, setCartItems] = useState<CartItems[]>([]);
-  // const [count, setCount] = useState("helo")
 
   const addToCart = (item: CartItems) => {
-    
     setCartItems((prevItems) => [...prevItems, item]);
   };
 
@@ -24,7 +21,7 @@ const App = () => {
       <div className="container">
         <div className="desert_section">
           <h1>Desserts</h1>
-          <Desserts addToCart={addToCart}/>
+          <Desserts addToCart={addToCart} />
         </div>
         <div className="order_section">
           <Cart cartItems={cartItems} />

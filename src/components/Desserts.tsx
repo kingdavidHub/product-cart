@@ -6,10 +6,21 @@ interface CartItems {
   name: string;
   price: number;
   category: string;
+  image: ImageSrc;
 }
 
+type ImageSrc = {
+  image: {
+    desktop: string;
+    tablet: string;
+    mobile: string;
+  };
+};
+
+type CartPreview = Omit<CartItems, "image">;
+
 type DesertProps = {
-  addToCart: (item: CartItems) => void;
+  addToCart: (item: CartPreview) => void;
 };
 
 const Desserts = ({ addToCart }: DesertProps) => {
@@ -28,14 +39,6 @@ const Desserts = ({ addToCart }: DesertProps) => {
     };
   }, []);
 
-  type ImageSrc = {
-    image: {
-      desktop: string;
-      tablet: string;
-      mobile: string;
-    };
-  };
-
   const getImageSrc = (item: ImageSrc): string => {
     if (documentWidth >= 1024) {
       return item.image.desktop;
@@ -46,6 +49,15 @@ const Desserts = ({ addToCart }: DesertProps) => {
     }
   };
 
+  const handleCart = (item: Omit<CartItems,  "image">) => {
+      const cart = {
+        name: item.name,
+        price: item.price,
+        category: item.category
+      };
+      addToCart(cart);
+    }
+
   return (
     <>
       <div className="dessert_order_ui">
@@ -54,7 +66,7 @@ const Desserts = ({ addToCart }: DesertProps) => {
             <div className="dessert_view">
               <img src={getImageSrc(item)} className="dessert-image" />
               <div className="add_to_cart">
-                <button onClick={() => addToCart(item)}>
+                <button onClick={() => handleCart(item)}>
                   <span>
                     <img src={cart} alt="" />
                   </span>

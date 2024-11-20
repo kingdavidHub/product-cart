@@ -1,3 +1,5 @@
+import Order from "./Order";
+
 interface CartItem {
   name: string;
   price: number;
@@ -11,16 +13,21 @@ interface CartProps {
 const Cart = ({ cartItems }: CartProps) => {
   return (
     <>
-      {cartItems.length === 0 ? (
-        <div className="cart_view">
-          <h2>Your Cart (0)</h2>
-          <p>Your added items will appear here</p>
-        </div>
-      ) : (
-        <>
-          <h1>Hello world</h1>
-        </>
-      )}
+      <div className="cart_view">
+        <h2>Your Cart (0)</h2>
+        <Order name="Order" price={0} category="Category" />
+        {/* {cartItems.length > 0 ? (
+          <>
+            {cartItems.map((item, index) => (
+              <Order key={index} {...item} />
+            ))}
+          </>
+        ) : (
+          <>
+            <p>Your added items will appear here</p>
+          </>
+        )} */}
+      </div>
     </>
   );
 };
