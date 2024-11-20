@@ -110,6 +110,7 @@ body {
   height: 300px;
   border-radius: 12px;
   padding: 20px;
+  overflow: scroll;
 }
 
 .cart_empty h2, .cart-active h2 {
@@ -152,5 +153,10 @@ body {
   }
   .dessert_order_ui > div {
     width: 30%;
+  }
+
+  .cart-active {
+    height: auto;
+    overflow: hidden;
   }
 }

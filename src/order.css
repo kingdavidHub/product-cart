@@ -6,9 +6,6 @@
   padding: .2rem;
 }
 
-.order-details {
-  width: 50%;
-}
 
 .order-details > h5 {
   color: var(--Rose-900);

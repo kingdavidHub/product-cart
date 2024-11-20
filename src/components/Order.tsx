@@ -4,19 +4,20 @@ import '../order.css';
 type Order = {
   name: string;
   price: number;
-  category: string;
+  quantity: number;
+  totalPrice: number;
 };
 
-const Order = ({ name, price, category }: Order) => {
+const Order = ({ name, price, quantity, totalPrice }: Order) => {
   return (
     <>
       <div className="order">
         <div className="order-details">
-          <h5>Classic Tiramisu</h5>
+          <h5>{name}</h5>
           <div className="order-total">
-            <span>1x</span>
-            <span>@ $5.50</span>
-            <span>$5.50</span>
+            <span>{quantity}x</span>
+            <span>@ {price}</span>
+            <span>${totalPrice}</span>
           </div>
         </div>
         <div className="order-close">

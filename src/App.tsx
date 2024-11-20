@@ -7,13 +7,29 @@ interface CartItems {
   name: string;
   price: number;
   category: string;
+  quantity: number;
+  totalPrice: number;
 }
 
 const App = () => {
   const [cartItems, setCartItems] = useState<CartItems[]>([]);
 
   const addToCart = (item: CartItems) => {
-    setCartItems((prevItems) => [...prevItems, item]);
+    // setCartItems((prevItems) => [...prevItems, item]);
+    setCartItems((prevItems) => {
+      const existingItemIndex = prevItems.findIndex((cartItem) => cartItem.name === item.name);
+      if (existingItemIndex !== -1) {
+        const updatedItems = [...prevItems];
+        updatedItems[existingItemIndex] = {
+          ...updatedItems[existingItemIndex],
+          quantity: updatedItems[existingItemIndex].quantity + 1,
+          totalPrice: updatedItems[existingItemIndex].totalPrice + item.price,
+        };
+        return updatedItems;
+      } else {
+        return [...prevItems, { ...item, quantity: 1 }];
+      }
+    });
   };
 
   return (

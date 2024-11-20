@@ -4,6 +4,8 @@ interface CartItem {
   name: string;
   price: number;
   category: string;
+  quantity: number;
+  totalPrice: number;
 }
 
 interface CartProps {
@@ -13,10 +15,9 @@ interface CartProps {
 const Cart = ({ cartItems }: CartProps) => {
   return (
     <>
-      <div className={cartItems.length > 0 ? 'cart-active' : 'cart_empty'}>
-        <h2>Your Cart (0)</h2>
-        <Order name="Order" price={5} category="Category" />
-        {/* {cartItems.length > 0 ? (
+      <div className={cartItems.length > 0 ? "cart-active" : "cart_empty"}>
+        <h2>Your Cart ({cartItems.length})</h2>
+        {cartItems.length > 0 ? (
           <>
             {cartItems.map((item, index) => (
               <Order key={index} {...item} />
@@ -26,7 +27,7 @@ const Cart = ({ cartItems }: CartProps) => {
           <>
             <p>Your added items will appear here</p>
           </>
-        )} */}
+        )}
       </div>
     </>
   );

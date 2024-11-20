@@ -6,7 +6,9 @@ interface CartItems {
   name: string;
   price: number;
   category: string;
+  quantity: number;
   image: ImageSrc;
+  totalPrice: number;
 }
 
 type ImageSrc = {
@@ -53,7 +55,9 @@ const Desserts = ({ addToCart }: DesertProps) => {
       const cart = {
         name: item.name,
         price: item.price,
-        category: item.category
+        totalPrice: item.price,
+        category: item.category,
+        quantity: 1,
       };
       addToCart(cart);
     }
