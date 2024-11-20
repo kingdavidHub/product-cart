@@ -1,0 +1,48 @@
+.order {
+  display: flex;
+  justify-content: space-between;
+  line-height: 1.5625rem;
+  align-items: center;
+  padding: .2rem;
+}
+
+.order-details {
+  width: 50%;
+}
+
+.order-details > h5 {
+  color: var(--Rose-900);
+}
+
+.order-total {
+  display: flex;
+}
+
+.order-total > :last-child {
+  font-weight: bold;
+}
+
+.order-total > span {
+  font-size: 16px;
+  color: var(--Rose-500);
+  margin: 0px 5px;
+}
+
+.order-close-button {
+  border: none;
+  outline: none;
+  width: 1rem;
+  height: 1rem;
+  background: none;
+  border: 1px solid var(--Rose-500);
+  border-radius: 100%;
+}
+
+.order-close-button:hover {
+  cursor: pointer;
+}
+
+.order-close-button > img {
+  width: 100%;
+  height: 100%;
+}

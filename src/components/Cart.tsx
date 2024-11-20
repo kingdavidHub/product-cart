@@ -13,9 +13,9 @@ interface CartProps {
 const Cart = ({ cartItems }: CartProps) => {
   return (
     <>
-      <div className="cart_view">
+      <div className={cartItems.length > 0 ? 'cart-active' : 'cart_empty'}>
         <h2>Your Cart (0)</h2>
-        <Order name="Order" price={0} category="Category" />
+        <Order name="Order" price={5} category="Category" />
         {/* {cartItems.length > 0 ? (
           <>
             {cartItems.map((item, index) => (
