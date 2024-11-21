@@ -4,6 +4,11 @@
   line-height: 1.5625rem;
   align-items: center;
   padding: .2rem;
+  margin-bottom: .5rem;
+  border-bottom: 2px solid var(--Rose-100);
+}
+.order:last-child {
+  border-bottom: none;
 }
 
 

@@ -40,7 +40,7 @@ const App = () => {
           <Desserts addToCart={addToCart} />
         </div>
         <div className="order_section">
-          <Cart cartItems={cartItems} />
+          <Cart cartItems={cartItems}  setCartItems={setCartItems}/>
         </div>
       </div>
     </>

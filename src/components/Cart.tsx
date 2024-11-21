@@ -1,4 +1,5 @@
 import Order from "./Order";
+import CarbonNeutral from "../assets/images/icon-carbon-neutral.svg";
 
 interface CartItem {
   name: string;
@@ -10,9 +11,10 @@ interface CartItem {
 
 interface CartProps {
   cartItems: CartItem[];
+  setCartItems: React.Dispatch<React.SetStateAction<CartItem[]>>;
 }
 
-const Cart = ({ cartItems }: CartProps) => {
+const Cart = ({ cartItems, setCartItems }: CartProps) => {
   return (
     <>
       <div className={cartItems.length > 0 ? "cart-active" : "cart_empty"}>
@@ -20,8 +22,21 @@ const Cart = ({ cartItems }: CartProps) => {
         {cartItems.length > 0 ? (
           <>
             {cartItems.map((item, index) => (
-              <Order key={index} {...item} />
+              <Order key={index} {...item} setCartItems={setCartItems}/>
             ))}
+            <div className="order-total">
+              <span>Order Total</span>
+              <span>$46.50</span>
+            </div>
+
+            <div className="carbon-neutral-container">
+              <img src={CarbonNeutral} alt="carbon neural" width={30} />
+              <span>
+                This is a <b>carbon-neutral</b> delivery
+              </span>
+            </div>
+
+            <button className="order-button">Confirm Order</button>
           </>
         ) : (
           <>

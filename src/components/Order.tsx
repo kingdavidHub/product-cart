@@ -1,14 +1,31 @@
 import IconRemove from "../assets/images/icon-remove-item.svg";
 
-import '../order.css';
+import "../order.css";
+
+interface CartItem {
+  name: string;
+  price: number;
+  category: string;
+  quantity: number;
+  totalPrice: number;
+}
+
 type Order = {
   name: string;
   price: number;
   quantity: number;
   totalPrice: number;
+  setCartItems: React.Dispatch<React.SetStateAction<CartItem[]>>;
 };
 
-const Order = ({ name, price, quantity, totalPrice }: Order) => {
+const Order = ({ name, price, quantity, totalPrice, setCartItems }: Order) => {
+  const removeOrder = (name: string) => {
+    setCartItems((prevItems) => {
+      const updatedItems = prevItems.filter((item) => item.name !== name);
+      return updatedItems;
+    });
+
+  };
   return (
     <>
       <div className="order">
@@ -21,7 +38,10 @@ const Order = ({ name, price, quantity, totalPrice }: Order) => {
           </div>
         </div>
         <div className="order-close">
-          <button className="order-close-button">
+          <button
+            className="order-close-button"
+            onClick={() => removeOrder(name)}  
+          >
             <img src={IconRemove} alt="Remove order " />
           </button>
         </div>
