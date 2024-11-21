@@ -39,7 +39,7 @@ const Order = ({ name, price, quantity, totalPrice, setCartItems }: Order) => {
         </div>
         <div className="order-close">
           <button
-            className="order-close-button"
+            className="icon-reset"
             onClick={() => removeOrder(name)}  
           >
             <img src={IconRemove} alt="Remove order " />

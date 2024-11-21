@@ -54,6 +54,10 @@ body {
   position: relative;
 }
 
+.desert_active > img {
+  border: 5px solid var(--Red);
+}
+
 .dessert_view .add_to_cart {
   position: absolute;
   bottom: -15px;
@@ -64,18 +68,43 @@ body {
   align-items: center;
 }
 
-.dessert_view .add_to_cart button {
-  border: none;
-  padding: 10px 12px;
-  outline: none;
+.dessert_view .cart-ready,
+.dessert_view .add_to_cart .cart-inactive {
   width: 150px;
-  background-color: var(--Rose-50);
-  border: 1px solid var(--Rose-500);
-  border-radius: 16px;
-  font-weight: bolder;
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
+  padding: 10px 12px;
+  border-radius: 16px;
+}
+.dessert_view .cart-ready {
+  background: var(--Red);
+  justify-content: space-between;
+  color: #fff;
+}
+
+.cart-ready > button {
+  border: none;
+  outline: none;
+  width: 1rem;
+  height: 1rem;
+  background-color: var(--Red);
+  border: 1px solid #fff;
+  border-radius: 100%;
+  padding: 0.2rem;
+  cursor: pointer;
+}
+
+.cart-ready > button > img {
+  width: 100%;
+  height: 100%;
+}
+
+.dessert_view .add_to_cart .cart-inactive {
+  border: none;
+  outline: none;
+  border: 1px solid var(--Rose-500);
+  font-weight: bolder;
+  justify-content: space-evenly;
   cursor: pointer;
 }
 
@@ -129,15 +158,15 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   background: var(--Rose-100);
   border-radius: 5px;
-  margin: .7rem;
+  margin: 0.7rem;
 }
 
 .carbon-neutral-container span {
   color: var(--Rose-500);
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
 
 .order-button {
@@ -152,13 +181,14 @@ body {
   cursor: pointer;
 }
 
-.cart_empty h2, .cart-active h2 {
-  margin: .5rem 0;
+.cart_empty h2,
+.cart-active h2 {
+  margin: 0.5rem 0;
   color: var(--Red);
 }
 
 .cart_empty p {
-  position:  absolute;
+  position: absolute;
   bottom: 50px;
   font-weight: bold;
   font-size: 0.8rem;

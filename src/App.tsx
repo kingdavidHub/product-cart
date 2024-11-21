@@ -17,7 +17,9 @@ const App = () => {
   const addToCart = (item: CartItems) => {
     // setCartItems((prevItems) => [...prevItems, item]);
     setCartItems((prevItems) => {
-      const existingItemIndex = prevItems.findIndex((cartItem) => cartItem.name === item.name);
+      const existingItemIndex = prevItems.findIndex(
+        (cartItem) => cartItem.name === item.name
+      );
       if (existingItemIndex !== -1) {
         const updatedItems = [...prevItems];
         updatedItems[existingItemIndex] = {
@@ -37,10 +39,14 @@ const App = () => {
       <div className="container">
         <div className="desert_section">
           <h1>Desserts</h1>
-          <Desserts addToCart={addToCart} />
+          <Desserts
+            addToCart={addToCart}
+            cartItems={cartItems}
+            setCartItems={setCartItems}
+          />
         </div>
         <div className="order_section">
-          <Cart cartItems={cartItems}  setCartItems={setCartItems}/>
+          <Cart cartItems={cartItems} setCartItems={setCartItems} />
         </div>
       </div>
     </>
