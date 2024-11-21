@@ -15,6 +15,15 @@ interface CartProps {
 }
 
 const Cart = ({ cartItems, setCartItems }: CartProps) => {
+  const getTotalPrice = (cartItems: CartItem[]): number => {
+    let totalOrder: number = 0;
+    cartItems.map((item) => {
+      totalOrder += item.totalPrice;
+    });
+
+    return totalOrder;
+  };
+
   return (
     <>
       <div className={cartItems.length > 0 ? "cart-active" : "cart_empty"}>
@@ -22,11 +31,11 @@ const Cart = ({ cartItems, setCartItems }: CartProps) => {
         {cartItems.length > 0 ? (
           <>
             {cartItems.map((item, index) => (
-              <Order key={index} {...item} setCartItems={setCartItems}/>
+              <Order key={index} {...item} setCartItems={setCartItems} />
             ))}
             <div className="order-total">
               <span>Order Total</span>
-              <span>$46.50</span>
+              <span>${getTotalPrice(cartItems)}</span>
             </div>
 
             <div className="carbon-neutral-container">
