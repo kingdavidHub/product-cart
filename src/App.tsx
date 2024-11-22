@@ -14,7 +14,15 @@ interface CartItems {
 
 const App = () => {
   const [cartItems, setCartItems] = useState<CartItems[]>([]);
-  const [orderCompleted, setOrderCompleted] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   const addToCart = (item: CartItems) => {
     setCartItems((prevItems) => {
@@ -38,33 +46,26 @@ const App = () => {
   return (
     <>
       <div className="container">
-        {orderCompleted === false ? (
-          <>
-            <div className="desert_section">
-              <h1>Desserts</h1>
-              <Desserts
-                addToCart={addToCart}
-                cartItems={cartItems}
-                setCartItems={setCartItems}
-              />
-            </div>
-            <div className="order_section">
-              <Cart
-                cartItems={cartItems}
-                setCartItems={setCartItems}
-                setOrderCompleted={setOrderCompleted}
-              />
-            </div>
-          </>
-        ) : (
-          <>
-            <h1>Desserts</h1>
-            <OrderCompleted
-              setOrderCompleted={setOrderCompleted}
-              setCartItems={setCartItems}
-            />
-          </>
-        )}
+        <div className="desert_section">
+          <h1>Desserts</h1>
+          <Desserts
+            addToCart={addToCart}
+            cartItems={cartItems}
+            setCartItems={setCartItems}
+          />
+        </div>
+        <div className="order_section">
+          <Cart
+            cartItems={cartItems}
+            setCartItems={setCartItems}
+            handleOpen={handleOpen}
+          />
+        </div>
+        <OrderCompleted
+          setCartItems={setCartItems}
+          isOpen={open}
+          onClose={handleClose}
+        />
       </div>
     </>
   );
