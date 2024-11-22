@@ -9,19 +9,19 @@ interface CartItems {
   price: number;
   category: string;
   quantity: number;
-  image: ImageSrc;
   totalPrice: number;
-}
-
-type ImageSrc = {
+  thumbnail: string;
   image: {
     desktop: string;
     tablet: string;
     mobile: string;
+    thumbnail: string;
   };
-};
+}
 
-type CartPreview = Omit<CartItems, "image">;
+type CartPreview = Omit<CartItems, "image"> & {
+  thumbnail: string;
+};
 
 type DesertProps = {
   addToCart: (item: CartPreview) => void;
@@ -45,6 +45,14 @@ const Desserts = ({ addToCart, cartItems, setCartItems }: DesertProps) => {
     };
   }, []);
 
+  interface ImageSrc {
+    image: {
+      desktop: string;
+      tablet: string;
+      mobile: string;
+    };
+  } 
+
   const getImageSrc = (item: ImageSrc): string => {
     if (documentWidth >= 1024) {
       return item.image.desktop;
@@ -56,14 +64,14 @@ const Desserts = ({ addToCart, cartItems, setCartItems }: DesertProps) => {
   };
 
   const handleCart = (
-    item: ImageSrc & { name: string; price: number; category: string }
+    item: CartItems
   ) => {
+    const { image,  ...items} = item;
     const cart = {
-      name: item.name,
-      price: item.price,
-      totalPrice: item.price,
-      category: item.category,
+      ...items,
       quantity: 1,
+      totalPrice: item.price,
+      thumbnail: image.thumbnail,
     };
     addToCart(cart);
   };
