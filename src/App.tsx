@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import Cart from "./components/Cart";
 import Desserts from "./components/Desserts";
+import OrderCompleted from "./components/OrderCompleted";
 
 interface CartItems {
   name: string;
@@ -13,9 +14,9 @@ interface CartItems {
 
 const App = () => {
   const [cartItems, setCartItems] = useState<CartItems[]>([]);
+  const [orderCompleted, setOrderCompleted] = useState<boolean>(false);
 
   const addToCart = (item: CartItems) => {
-    // setCartItems((prevItems) => [...prevItems, item]);
     setCartItems((prevItems) => {
       const existingItemIndex = prevItems.findIndex(
         (cartItem) => cartItem.name === item.name
@@ -37,17 +38,33 @@ const App = () => {
   return (
     <>
       <div className="container">
-        <div className="desert_section">
-          <h1>Desserts</h1>
-          <Desserts
-            addToCart={addToCart}
-            cartItems={cartItems}
-            setCartItems={setCartItems}
-          />
-        </div>
-        <div className="order_section">
-          <Cart cartItems={cartItems} setCartItems={setCartItems} />
-        </div>
+        {orderCompleted === false ? (
+          <>
+            <div className="desert_section">
+              <h1>Desserts</h1>
+              <Desserts
+                addToCart={addToCart}
+                cartItems={cartItems}
+                setCartItems={setCartItems}
+              />
+            </div>
+            <div className="order_section">
+              <Cart
+                cartItems={cartItems}
+                setCartItems={setCartItems}
+                setOrderCompleted={setOrderCompleted}
+              />
+            </div>
+          </>
+        ) : (
+          <>
+            <h1>Desserts</h1>
+            <OrderCompleted
+              setOrderCompleted={setOrderCompleted}
+              setCartItems={setCartItems}
+            />
+          </>
+        )}
       </div>
     </>
   );

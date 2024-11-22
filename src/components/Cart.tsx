@@ -12,9 +12,10 @@ interface CartItem {
 interface CartProps {
   cartItems: CartItem[];
   setCartItems: React.Dispatch<React.SetStateAction<CartItem[]>>;
+  setOrderCompleted?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Cart = ({ cartItems, setCartItems }: CartProps) => {
+const Cart = ({ cartItems, setCartItems, setOrderCompleted }: CartProps) => {
   const getTotalPrice = (cartItems: CartItem[]): number => {
     let totalOrder: number = 0;
     cartItems.map((item) => {
@@ -22,6 +23,12 @@ const Cart = ({ cartItems, setCartItems }: CartProps) => {
     });
 
     return totalOrder;
+  };
+
+  const confirmOrder = () => {
+    if (setOrderCompleted) {
+      setOrderCompleted((prevItem) => !prevItem);
+    }
   };
 
   return (
@@ -45,7 +52,7 @@ const Cart = ({ cartItems, setCartItems }: CartProps) => {
               </span>
             </div>
 
-            <button className="order-button">Confirm Order</button>
+            <button className="order-button" onClick={() => confirmOrder()}>Confirm Order</button>
           </>
         ) : (
           <>
