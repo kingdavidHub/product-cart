@@ -4,7 +4,6 @@ import Cart from "./components/Cart";
 import Desserts from "./components/Desserts";
 import OrderCompleted from "./components/OrderCompleted";
 
-
 interface CartItems {
   name: string;
   price: number;
@@ -18,7 +17,6 @@ interface CartItems {
     mobile: string;
     thumbnail: string;
   };
-  
 }
 
 const App = () => {
@@ -71,6 +69,7 @@ const App = () => {
           />
         </div>
         <OrderCompleted
+          cartItems={cartItems}
           setCartItems={setCartItems}
           isOpen={open}
           onClose={handleClose}

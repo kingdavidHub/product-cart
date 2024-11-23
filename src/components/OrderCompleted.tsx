@@ -1,6 +1,6 @@
 import "../styles/OrderCompleted.css";
 import OrderCompletedIcon from "../assets/images/icon-order-confirmed.svg";
-import DummyIcon from "../assets/images/image-macaron-thumbnail.jpg";
+import { getTotalPrice } from "../utils/app";
 
 interface CartItems {
   name: string;
@@ -15,19 +15,20 @@ interface CartItems {
     mobile: string;
     thumbnail: string;
   };
-  
 }
 
 type OrderCompletedProps = {
   setCartItems: React.Dispatch<React.SetStateAction<CartItems[]>>;
   isOpen: boolean;
   onClose: () => void;
+  cartItems: CartItems[];
 };
 
 const OrderCompleted = ({
   setCartItems,
   isOpen,
   onClose,
+  cartItems,
 }: OrderCompletedProps) => {
   const startNewOrder = () => {
     setCartItems([]);
@@ -50,39 +51,22 @@ const OrderCompleted = ({
             <span>We hope you enjoy your food!</span>
           </div>
           <div className="order-confirmed-list">
-            <div className="order-confirmed-item">
-              <img src={DummyIcon} alt="dummy icon" width={50} />
-              <div className="order-confirmed-details">
-                <h5>Classic Tiramisu</h5>
-                <div className="order-confirmed-quantity">
-                  <span>1x</span>
-                  <span>@ $5.50</span>
+            {cartItems.map((item, index) => (
+              <div className="order-confirmed-item" key={index}>
+                <img src={item.image.thumbnail} alt="dummy icon" width={50} />
+                <div className="order-confirmed-details">
+                  <h5>{item.name}</h5>
+                  <div className="order-confirmed-quantity">
+                    <span>{item.quantity}x</span>
+                    <span>@ ${item.totalPrice}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="order-confirmed-item">
-              <img src={DummyIcon} alt="dummy icon" width={50} />
-              <div className="order-confirmed-details">
-                <h5>Classic Tiramisu</h5>
-                <div className="order-confirmed-quantity">
-                  <span>1x</span>
-                  <span>@ $5.50</span>
-                </div>
-              </div>
-            </div>
-            <div className="order-confirmed-item">
-              <img src={DummyIcon} alt="dummy icon" width={50} />
-              <div className="order-confirmed-details">
-                <h5>Classic Tiramisu</h5>
-                <div className="order-confirmed-quantity">
-                  <span>1x</span>
-                  <span>@ $5.50</span>
-                </div>
-              </div>
-            </div>
+            ))}
+
             <div className="order-completed-total">
               <span>Order Total</span>
-              <span>$46.50</span>
+              <span>${getTotalPrice(cartItems)}</span>
             </div>
           </div>
           <button className="new-order" onClick={() => startNewOrder()}>

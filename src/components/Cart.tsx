@@ -1,5 +1,6 @@
 import Order from "./Order";
 import CarbonNeutral from "../assets/images/icon-carbon-neutral.svg";
+import { getTotalPrice } from "../utils/app";
 
 interface CartItems {
   name: string;
@@ -23,14 +24,6 @@ interface CartProps {
 }
 
 const Cart = ({ cartItems, setCartItems, handleOpen }: CartProps) => {
-  const getTotalPrice = (cartItems: CartItems[]): number => {
-    let totalOrder: number = 0;
-    cartItems.map((item) => {
-      totalOrder += item.totalPrice;
-    });
-
-    return totalOrder;
-  };
 
   return (
     <>
