@@ -19,9 +19,6 @@ interface CartItems {
   };
 }
 
-
-
-
 type DesertProps = {
   addToCart: (item: CartItems) => void;
   cartItems: CartItems[];
@@ -50,7 +47,7 @@ const Desserts = ({ addToCart, cartItems, setCartItems }: DesertProps) => {
       tablet: string;
       mobile: string;
     };
-  } 
+  }
 
   const getImageSrc = (item: ImageSrc): string => {
     if (documentWidth >= 1024) {
@@ -80,15 +77,14 @@ const Desserts = ({ addToCart, cartItems, setCartItems }: DesertProps) => {
     const cartItem = cartItems.find((item) => item.name === itemName);
     return cartItem?.quantity ?? 0;
   };
-  
 
   type CartMethod = {
     incrementItem: (itemName: string) => void;
     decrementItem: (itemName: string) => void;
-  }
+  };
 
   const cartMethod: CartMethod = {
-    incrementItem: (itemName: string) => {    
+    incrementItem: (itemName: string) => {
       setCartItems((prevItems) => {
         const updatedItems = prevItems.map((item) => {
           if (item.name === itemName) {
@@ -105,26 +101,27 @@ const Desserts = ({ addToCart, cartItems, setCartItems }: DesertProps) => {
     },
     decrementItem: (itemName: string) => {
       setCartItems((prevItems) => {
-        const updatedItems = prevItems.map((item) => {
-          if (item.name === itemName) {
-            const newQuantity: number = item.quantity - 1;
-            if (newQuantity === 0) {
-              return null;
+        const updatedItems = prevItems
+          .map((item) => {
+            if (item.name === itemName) {
+              const newQuantity: number = item.quantity - 1;
+              if (newQuantity === 0) {
+                return null;
+              }
+              return {
+                ...item,
+                quantity: newQuantity,
+                totalPrice: item.totalPrice - item.price,
+              };
             }
-            return {
-              ...item,
-              quantity: newQuantity,
-              totalPrice: item.totalPrice - item.price,
-            };
-          }
-          return item;
-        }).filter((item): item is CartItems => item !== null);
-        
+            return item;
+          })
+          .filter((item): item is CartItems => item !== null);
+
         return updatedItems;
       });
-    }
-  }
-
+    },
+  };
 
   return (
     <>
@@ -132,33 +129,33 @@ const Desserts = ({ addToCart, cartItems, setCartItems }: DesertProps) => {
         {data.map((item, key) => (
           <div key={key}>
             {cartItems.some((cartItem) => cartItem.name === item.name) ? (
-              <div className="dessert_view desert_active">
-                <img src={getImageSrc(item)} className="dessert-image" />
-                <div className="add_to_cart cart-ready">
-                  <button onClick={() => cartMethod.incrementItem(item.name)}>
-                    <img src={IconIncrement} alt="" />
-                  </button>
-                  <span>{getItemQuantity(item.name)}</span>
-                  <button onClick={() => cartMethod.decrementItem(item.name)}>
-                    <img src={IconDecrement} alt="" />
-                  </button>
+                <div className="dessert_view desert_active">
+                  <img src={getImageSrc(item)} className="dessert-image" />
+                  <div className="add_to_cart cart-ready">
+                    <button onClick={() => cartMethod.incrementItem(item.name)}>
+                      <img src={IconIncrement} alt="" />
+                    </button>
+                    <span>{getItemQuantity(item.name)}</span>
+                    <button onClick={() => cartMethod.decrementItem(item.name)}>
+                      <img src={IconDecrement} alt="" />
+                    </button>
+                  </div>
                 </div>
-              </div>
             ) : (
-              <div className="dessert_view">
-                <img src={getImageSrc(item)} className="dessert-image" />
-                <div className="add_to_cart">
-                  <button
-                    className="cart-inactive"
-                    onClick={() => handleCart(item)}
-                  >
-                    <span>
-                      <img src={cart} alt="Add to cart" />
-                    </span>
-                    Add to Cart
-                  </button>
+                <div className="dessert_view">
+                  <img src={getImageSrc(item)} className="dessert-image" />
+                  <div className="add_to_cart">
+                    <button
+                      className="cart-inactive"
+                      onClick={() => handleCart(item)}
+                    >
+                      <span>
+                        <img src={cart} alt="Add to cart" />
+                      </span>
+                      Add to Cart
+                    </button>
+                  </div>
                 </div>
-              </div>
             )}
             <div className="dessert_order_info">
               <p>{item.category}</p>

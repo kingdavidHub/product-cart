@@ -201,8 +201,30 @@ body {
   color: var(--Rose-400);
 }
 
+
+/* Tablet */
+@media (min-width: 760px) {
+  .dessert_order_ui > div {
+    width: 30%;
+  }
+
+  /* Desserts order UI */
+  .dessert_order_ui {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+  }
+
+  .cart-active {
+    height: auto;
+    overflow: hidden;
+  }
+
+}
+
 /* Desktop */
-@media (min-width: 430px) and (max-width: 1440px) {
+@media (min-width: 1280px) {
   .container {
     padding: 40px;
     flex-direction: row;
