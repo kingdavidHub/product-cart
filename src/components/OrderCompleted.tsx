@@ -8,6 +8,14 @@ interface CartItems {
   category: string;
   quantity: number;
   totalPrice: number;
+  thumbnail: string;
+  image: {
+    desktop: string;
+    tablet: string;
+    mobile: string;
+    thumbnail: string;
+  };
+  
 }
 
 type OrderCompletedProps = {

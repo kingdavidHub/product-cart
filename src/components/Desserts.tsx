@@ -19,14 +19,13 @@ interface CartItems {
   };
 }
 
-type CartPreview = Omit<CartItems, "image"> & {
-  thumbnail: string;
-};
+
+
 
 type DesertProps = {
-  addToCart: (item: CartPreview) => void;
-  cartItems: CartPreview[];
-  setCartItems: React.Dispatch<React.SetStateAction<CartPreview[]>>;
+  addToCart: (item: CartItems) => void;
+  cartItems: CartItems[];
+  setCartItems: React.Dispatch<React.SetStateAction<CartItems[]>>;
 };
 
 const Desserts = ({ addToCart, cartItems, setCartItems }: DesertProps) => {
@@ -64,14 +63,15 @@ const Desserts = ({ addToCart, cartItems, setCartItems }: DesertProps) => {
   };
 
   const handleCart = (
-    item: CartItems
+    item: Omit<CartItems, "quantity" | "totalPrice" | "thumbnail">
   ) => {
-    const { image,  ...items} = item;
+    const { image, ...items } = item;
     const cart = {
       ...items,
       quantity: 1,
       totalPrice: item.price,
       thumbnail: image.thumbnail,
+      image: image,
     };
     addToCart(cart);
   };
@@ -108,7 +108,7 @@ const Desserts = ({ addToCart, cartItems, setCartItems }: DesertProps) => {
         const updatedItems = prevItems.map((item) => {
           if (item.name === itemName) {
             const newQuantity: number = item.quantity - 1;
-            if(newQuantity === 0) {
+            if (newQuantity === 0) {
               return null;
             }
             return {
@@ -118,9 +118,9 @@ const Desserts = ({ addToCart, cartItems, setCartItems }: DesertProps) => {
             };
           }
           return item;
-        });
+        }).filter((item): item is CartItems => item !== null);
         
-        return updatedItems.filter((item): item is CartPreview => item !== null);
+        return updatedItems;
       });
     }
   }

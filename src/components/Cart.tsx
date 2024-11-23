@@ -1,22 +1,29 @@
 import Order from "./Order";
 import CarbonNeutral from "../assets/images/icon-carbon-neutral.svg";
 
-interface CartItem {
+interface CartItems {
   name: string;
   price: number;
   category: string;
   quantity: number;
   totalPrice: number;
+  thumbnail: string;
+  image: {
+    desktop: string;
+    tablet: string;
+    mobile: string;
+    thumbnail: string;
+  };
 }
 
 interface CartProps {
-  cartItems: CartItem[];
-  setCartItems: React.Dispatch<React.SetStateAction<CartItem[]>>;
+  cartItems: CartItems[];
+  setCartItems: React.Dispatch<React.SetStateAction<CartItems[]>>;
   handleOpen: () => void;
 }
 
 const Cart = ({ cartItems, setCartItems, handleOpen }: CartProps) => {
-  const getTotalPrice = (cartItems: CartItem[]): number => {
+  const getTotalPrice = (cartItems: CartItems[]): number => {
     let totalOrder: number = 0;
     cartItems.map((item) => {
       totalOrder += item.totalPrice;

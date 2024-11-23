@@ -4,12 +4,21 @@ import Cart from "./components/Cart";
 import Desserts from "./components/Desserts";
 import OrderCompleted from "./components/OrderCompleted";
 
+
 interface CartItems {
   name: string;
   price: number;
   category: string;
   quantity: number;
   totalPrice: number;
+  thumbnail: string;
+  image: {
+    desktop: string;
+    tablet: string;
+    mobile: string;
+    thumbnail: string;
+  };
+  
 }
 
 const App = () => {
